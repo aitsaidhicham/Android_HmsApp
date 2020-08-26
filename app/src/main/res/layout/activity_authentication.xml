@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".Authentication">
+    tools:context=".login">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar"
@@ -21,7 +21,7 @@
     <ImageView
         android:layout_below="@id/my_toolbar"
         android:background="@drawable/ic_launcher_background"
-        android:layout_margin="70dp"
+        android:layout_margin="50dp"
         android:id="@+id/logo"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
@@ -44,9 +44,11 @@
         android:id="@+id/email"
         android:layout_centerHorizontal="true"
         android:layout_width="match_parent"
+        android:textColor="@color/white"
         android:layout_height="wrap_content"></EditText>
 
     <EditText
+        android:textColor="@color/white"
         android:fontFamily="@font/roboto_regular"
         android:textColorHint="@color/white"
         android:background="@drawable/custom_input"
@@ -85,8 +87,7 @@
         android:layout_below="@+id/auth"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:onClick="createAccount"
-        android:text="create new account"
+        android:text="créer votre compte"
         android:textSize="15dp"></TextView>
 
     <ImageView

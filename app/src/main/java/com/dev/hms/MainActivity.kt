@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.my_toolbar))
     }
     fun c (view:View){
-        val intent = Intent(this, Authentication::class.java)
+        val intent = Intent(this, login::class.java)
         startActivity(intent)
     }
 }

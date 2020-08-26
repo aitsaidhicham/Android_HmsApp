@@ -6,49 +6,41 @@
     android:layout_height="match_parent"
     android:layout_alignParentBottom="false"
     android:background="@color/background"
-    tools:context=".Signup">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/my_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:alpha="0.09"
-        android:background="@color/white"
-        android:elevation="4dp">
+    tools:context=".signup">
 
 
-    </androidx.appcompat.widget.Toolbar>
 
     <TextView
+
+        android:layout_alignParentTop="true"
         android:id="@+id/text_createAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/my_toolbar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginVertical="50dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="25dp"
+        android:textStyle="bold"
         android:fontFamily="@font/roboto_regular"
-        android:text="Create a new account"
+        android:text="Créer votre compte"
         android:textColor="@color/white"
-        android:textSize="30dp">
+        android:textSize="25dp">
 
     </TextView>
 
     <EditText
-        android:id="@+id/email"
+        android:textColor="@color/white"
+        android:id="@+id/nom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/text_createAccount"
         android:layout_alignParentEnd="true"
         android:layout_marginHorizontal="20dp"
         android:layout_marginVertical="10dp"
-        android:layout_marginTop="60dp"
         android:background="@drawable/custom_input"
         android:drawableStart="@drawable/ic_email"
         android:drawablePadding="10dp"
         android:fontFamily="@font/roboto_regular"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
+        android:hint="Nom et Prénom"
+        android:inputType="textPersonName"
         android:padding="15dp"
         android:paddingHorizontal="10dp"
         android:textColorHint="@color/white">
@@ -58,6 +50,45 @@
 
 
     <EditText
+        android:textColor="@color/white"
+        android:maxLength="10"
+        android:id="@+id/num"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nom"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/ic_password"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/roboto_regular"
+        android:hint="Numéro de téléphone "
+        android:inputType="phone"
+        android:padding="15dp"
+        android:paddingHorizontal="10dp"
+        android:textColorHint="@color/white"></EditText>
+
+    <EditText
+        android:textColor="@color/white"
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/num"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/ic_password"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/roboto_regular"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:padding="15dp"
+        android:paddingHorizontal="10dp"
+        android:textColorHint="@color/white"></EditText>
+    <EditText
+        android:textColor="@color/white"
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -69,14 +100,14 @@
         android:drawableStart="@drawable/ic_password"
         android:drawablePadding="10dp"
         android:fontFamily="@font/roboto_regular"
-        android:hint="Password"
+        android:hint="Mot passe"
         android:inputType="textPassword"
         android:padding="15dp"
         android:paddingHorizontal="10dp"
         android:textColorHint="@color/white"></EditText>
-
-    <EditText
-        android:id="@+id/confirmPassword"
+    <TextView
+        android:textColor="@color/white"
+        android:id="@+id/wilaya"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/password"
@@ -87,21 +118,20 @@
         android:drawableStart="@drawable/ic_password"
         android:drawablePadding="10dp"
         android:fontFamily="@font/roboto_regular"
-        android:hint="Confirm Password"
-        android:inputType="textPassword"
+        android:hint="Wilaya"
+        android:textSize="20sp"
         android:padding="15dp"
         android:paddingHorizontal="10dp"
-        android:textColorHint="@color/white"></EditText>
+        android:textColorHint="@color/white"></TextView>
 
 
     <Button
-
+        android:layout_marginBottom="120dp"
+       android:layout_alignParentBottom="true"
         android:id="@+id/signup"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/confirmPassword"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
         android:background="@drawable/custom_button"
         android:fontFamily="@font/roboto_medium"
         android:text="Sign UP"
