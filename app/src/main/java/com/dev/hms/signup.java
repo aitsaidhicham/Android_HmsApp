@@ -94,7 +94,7 @@ public class signup extends AppCompatActivity {
                     return;
 
                 }
-                if ((motpasse.length()<5)&&(motpasse.length()>12)){
+                if ((motpasse.length()<5)|(motpasse.length()>12)){
                     password.setError("le mot passe doit etre entre entre 5 et 12 character");
                     password.requestFocus();
                     return;

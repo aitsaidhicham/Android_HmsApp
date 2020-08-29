@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="8dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="9dp"
+        android:background="@drawable/button"
+        android:elevation="8dp"
+
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/button"
+            android:elevation="8dp"
+
+
+            >
+
+            <ImageView
+                android:id="@+id/place_image"
+                android:layout_width="135dp"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/recentimage1" />
+
+            <TextView
+                android:id="@+id/place_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@+id/place_image"
+                android:text="nom de hotel"
+                android:textSize="17sp"
+                android:textColor="@color/item"
+                android:fontFamily="@font/amiko"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/place_image"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <TextView
+                android:id="@+id/wilaya"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/place_name"
+                android:layout_marginStart="8dp"
+                android:textSize="15sp"
+                android:layout_toRightOf="@+id/place_image"
+                android:text="la wilaya"
+                android:textColor="@color/etoilecolor"
+                app:layout_constraintStart_toEndOf="@+id/place_image"
+                tools:layout_editor_absoluteY="16dp" />
+
+
+
+            <RatingBar
+
+                android:progressTint="@color/jaune"
+                android:id="@+id/rating"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/prix"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_toRightOf="@+id/place_image"
+                android:numStars="5"></RatingBar>
+
+            <TextView
+                android:textSize="15sp"
+                android:id="@+id/prix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/wilaya"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:layout_toRightOf="@+id/place_image"
+                android:text="4500 DA"
+                android:textColor="@color/etoilecolor"
+                app:layout_constraintStart_toEndOf="@+id/place_image"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <TextView
+                android:id="@+id/localisation"
+                android:layout_width="90dp"
+                android:layout_height="20dp"
+                android:layout_below="@+id/rating"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_toRightOf="@+id/place_image"
+                android:background="@drawable/btnbleu"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:text="Localisation"
+                android:textColor="@color/white"
+                android:textSize="11sp"
+                app:layout_constraintStart_toEndOf="@+id/place_image"
+
+                ></TextView>
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="20dp"
+                android:layout_below="@+id/rating"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+
+                android:layout_toRightOf="@+id/localisation"
+                android:background="@drawable/btnbleu"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:text="Voir détail"
+                android:textColor="@color/white"
+                android:textSize="11sp"
+                app:layout_constraintStart_toEndOf="@+id/place_image"
+
+                ></TextView>
+
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
+</RelativeLayout>

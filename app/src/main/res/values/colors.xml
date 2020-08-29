@@ -6,5 +6,14 @@
     <color name="background">#121212</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="noir">#211c1c</color>
+    <color name="etoilecolor">#575757</color>
+    <color name="griscommande">#f3f3f3</color>
+    <color name="item">#3d4266</color>
+    <color name="jaune">#CFB53B</color>
+
+
+
+
 
 </resources>

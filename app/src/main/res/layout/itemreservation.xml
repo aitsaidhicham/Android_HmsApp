@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:elevation="8dp"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="9dp"
+        android:elevation="6dp"
+        android:background="@drawable/button"
+
+
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/button"
+            android:elevation="8dp"
+
+
+            >
+
+            <TextView
+                android:id="@+id/nomProduit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/roboto_medium"
+
+                android:text="Nom Du Hotel "
+                android:textColor="@color/noir"
+                android:textSize="18sp"
+                android:textStyle="bold">
+
+            </TextView>
+            <TextView
+                android:id="@+id/pripr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5 Journé"
+                android:textColor="@color/noir"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="12dp"
+                android:layout_marginRight="10dp">
+
+            </TextView>
+
+            <RelativeLayout
+                android:layout_width="340dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nomProduit"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:id="@+id/info"
+
+                android:background="@drawable/griscomande">
+
+
+
+
+
+                <TextView
+                    android:id="@+id/etat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="11dp"
+                    android:layout_marginTop="7dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Etat"
+                    android:textColor="@color/noir"
+                    android:textSize="15sp"
+                    android:textStyle="bold">
+
+                </TextView>
+
+                <TextView
+                    android:layout_marginBottom="10dp"
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/etat"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="7dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Date"
+                    android:textColor="@color/noir"
+                    android:textSize="16sp"
+
+                    android:textStyle="normal">
+
+                </TextView>
+
+
+            </RelativeLayout>
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="23dp"
+                android:layout_below="@+id/info"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:text="15000 DA"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:layout_marginBottom="7dp"
+                android:textStyle="bold"
+                android:background="@drawable/btnbleu"
+                android:gravity="center"
+                android:layout_marginLeft="190dp">
+
+            </TextView>
+        </RelativeLayout>
+
+
+
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

@@ -34,7 +34,7 @@ public class home extends AppCompatActivity {
         meowBottomNavigation.add(new MeowBottomNavigation.Model(3,R.drawable.ic_baseline_transfer_within_a_station_24));
         meowBottomNavigation.add(new MeowBottomNavigation.Model(4,R.drawable.ic_baseline_emoji_people_24));
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.container,new fragmentacceuil()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fralelayout,new fragmentacceuil()).commit();
 
 
         meowBottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
@@ -59,11 +59,11 @@ public class home extends AppCompatActivity {
                         select=new fragmentmesreservation();
                         break;
                     case ID_favoire:
-                        select=new fragmentprofile();
+                        select=new fragmentfavoire();
                         break;
 
                 }
-                getSupportFragmentManager().beginTransaction().replace(R.id.container,select).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fralelayout,select).commit();
 
 
             }
