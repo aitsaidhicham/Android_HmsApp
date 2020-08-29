@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".reservation">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/amiko"
+        android:text="Réserver votre chambre"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"></TextView>
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_marginTop="7dp"
+        android:layout_marginRight="20sp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        >
+</ImageView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="17sp"
+        android:textColor="@color/item"
+        android:text="Informations"
+        android:textStyle="bold"
+        android:textAllCaps="true">
+
+</TextView>
+        <ImageView
+            android:id="@+id/favorise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_favorite_24"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp"
+            ></ImageView>
+
+        <ImageView
+            android:id="@+id/defavorise"
+            android:visibility="gone"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/hh"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp"
+            ></ImageView>
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/information"
+        android:padding="10dp"
+        android:lineSpacingMultiplier="1.5"
+        android:fontFamily="@font/amiko"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textColor="@color/black"
+        android:textStyle="normal"
+        android:textSize="14sp"
+        android:text="L'AZ Hôtels Zephyr propose des hébergements climatisés à Mostaganem. Vous profiterez d’un restaurant, d’une réception ouverte 24h/24, d’un service d’étage et d’une connexion Wi-Fi gratuite dans l’ensemble des locaux. Un parking privé est disponible moyennant des frais supplémentaires.">
+</TextView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        >
+        <Button
+            android:layout_alignParentLeft="true"
+            android:id="@+id/appeler"
+            android:layout_width="140dp"
+            android:layout_height="35dp"
+            android:background="@drawable/custom_button"
+            android:textColor="@color/white"
+            android:text="Appeler"
+            android:elevation="6dp"
+            android:textAllCaps="false"
+            ></Button>
+        <Button
+            android:layout_alignParentRight="true"
+            android:id="@+id/localisation"
+            android:layout_width="140dp"
+            android:layout_height="35dp"
+            android:background="@drawable/custom_button"
+            android:textColor="@color/white"
+            android:text="Localisation"
+            android:elevation="6dp"
+            android:textAllCaps="false"
+            ></Button>
+</RelativeLayout>
+
+    <Button
+        android:id="@+id/reserver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Reserver votre chambre"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:fontFamily="@font/amiko"
+
+        android:background="@drawable/custom_button"></Button>
+
+
+
+</LinearLayout>
