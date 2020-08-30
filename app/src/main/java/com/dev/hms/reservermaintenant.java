@@ -8,9 +8,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -20,44 +22,47 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 public class reservermaintenant extends AppCompatActivity {
     private TextView type,date1,date2,enterphoto,somme;
     private ImageView imageView;
     private Button reserver;
+    public Uri imageuri;
+    private StorageReference storageReference;
     private long dure;
     private static  final int IMAGE_PICK_CODE =1000;
     private static  final int PERMISSION_CODE =1001;
     private String[] listeitems;
-    private FirebaseDatabase database,database1;
-    private DatabaseReference userRef,userRef1;
+    private FirebaseDatabase database;
+    private DatabaseReference userRef;
     private FirebaseAuth firebaseAuth;
-    private StorageReference storageReference;
-    private  long difference;
-    String dateone,datetwo,datedebut,datefin,typechambre;
+    private  long prixreservation;
+    private long prixtotal;
+    String dateone,datetwo,datedebut,datefin,typechambre,urlimage;
+    String prixduo,prixsolo,prixstudio,prixtriple;
 
     final ArrayList<String> listechambre = new ArrayList<>();
 
@@ -69,7 +74,6 @@ public class reservermaintenant extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservermaintenant);
         firebaseAuth=FirebaseAuth.getInstance();
-
         type=findViewById(R.id.type);
         reserver=findViewById(R.id.res);
         enterphoto=findViewById(R.id.entrerphoto);
@@ -77,6 +81,8 @@ public class reservermaintenant extends AppCompatActivity {
         date1=findViewById(R.id.date1);
         date2=findViewById(R.id.date2);
         imageView=findViewById(R.id.image);
+
+        storageReference=FirebaseStorage.getInstance().getReference().child("ccp");
 
         Calendar calendar =Calendar.getInstance();
         final  int year =calendar.get(Calendar.YEAR);
@@ -149,19 +155,26 @@ public class reservermaintenant extends AppCompatActivity {
                              String studio =dataSnapshot1.child("type_chambre").child("studio").getValue().toString();
                              String triple =dataSnapshot1.child("type_chambre").child("triple").getValue().toString();
 
+                             prixduo =dataSnapshot1.child("type_chambre").child("prix_duo").getValue().toString();
+                             prixsolo =dataSnapshot1.child("type_chambre").child("prix_solo").getValue().toString();
+                             prixstudio =dataSnapshot1.child("type_chambre").child("prix_studio").getValue().toString();
+                             prixtriple =dataSnapshot1.child("type_chambre").child("prix_triple").getValue().toString();
+
                              if (duo.equals("true")){
-                                 listechambre.add("Duo");
+                                 listechambre.add("Duo        "+prixduo+" DA");
 
                              }
 
                             if (solo.equals("true")){
-                                listechambre.add("Solo");
+                                listechambre.add("Solo       "+prixsolo+" DA");
+
 
                             }if (studio.equals("true")){
-                                listechambre.add("Studio");
+                                listechambre.add("Studio     "+prixstudio+" DA");
+
 
                             }if (triple.equals("true")){
-                                listechambre.add("Triple");
+                                listechambre.add("Triple     "+prixtriple+" DA");
 
                             }
 
@@ -192,7 +205,7 @@ public class reservermaintenant extends AppCompatActivity {
                 mbuilder2.setSingleChoiceItems( lista, -1, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        type.setText(finalLista1[which]);
+                        type.setText(finalLista1[which].substring(0,6));
                         dialog.dismiss();
                     }
                 });
@@ -225,9 +238,21 @@ public class reservermaintenant extends AppCompatActivity {
         reserver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 typechambre =type.getText().toString();
+                 typechambre =type.getText().toString().substring(0,6);
                  datedebut =date1.getText().toString();
                  datefin =date2.getText().toString();
+
+                if (typechambre.equals(("Duo        "+prixduo+" DA").substring(0,6))){
+                    prixtotal = dure*Long.parseLong(prixduo);
+
+                }
+                if (typechambre.equals(("Solo       "+prixsolo+" DA").substring(0,6))){
+                    prixtotal = dure*Long.parseLong(prixsolo);
+                }if (typechambre.equals(("Studio     "+prixstudio+" DA").substring(0,6))){
+                    prixtotal = dure*Integer.valueOf(prixduo);
+                }if (typechambre.equals(("Triple     "+prixtriple+" DA").substring(0,6))){
+                    prixtotal = dure*Integer.valueOf(prixtriple);
+                }
                 
                 if (typechambre.equals("Type de chambre")){
                     type.setError("entrer le type de chambre");
@@ -248,7 +273,7 @@ public class reservermaintenant extends AppCompatActivity {
                     return;
                 }
                 else {
-                    ajouter();
+                    uploadimage();
                 }
                         
             }
@@ -259,56 +284,6 @@ public class reservermaintenant extends AppCompatActivity {
 
 
     }
-
-    private void ajouter() {
-        final DatabaseReference rootref;
-        rootref= FirebaseDatabase.getInstance().getReference();
-        rootref.keepSynced(true);
-        rootref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                final HashMap<String, Object> userDataMap = new HashMap<>();
-                userDataMap.put("typechambre",typechambre);
-                userDataMap.put("datedebut", datedebut);
-                final String  key=getIntent().getStringExtra("nomhotel");
-                userDataMap.put("nomHotel", key);
-                userDataMap.put("datefin", datefin);
-                userDataMap.put("etat", "Confirmé");
-                userDataMap.put("dure",String.valueOf(dure)+" jours");
-                userDataMap.put("email",firebaseAuth.getCurrentUser().getEmail());
-                rootref.child("reservation").child(firebaseAuth.getCurrentUser().getUid()+key+ new Random().nextInt(10000)).updateChildren(userDataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(reservermaintenant.this,"Votre Reservation  a été terminée avec succés",Toast.LENGTH_SHORT).show();
-                        Intent intent =new Intent(reservermaintenant.this,home.class);
-                        startActivity(intent);
-                    }
-                });
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private void calculerdifference(String dateone, String datetwo) {
-               DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/uuuu");
-               String firstDate = dateone;
-               String secondeDate =datetwo;
-
-               LocalDate date1 =LocalDate.parse(firstDate,formatter);
-               LocalDate date2 =LocalDate.parse(secondeDate,formatter);
-               long daybetwen = ChronoUnit.DAYS.between(date1,date2);
-               dure= daybetwen;
-               somme.setText(String.valueOf(daybetwen));
-
-
-    }
-
     private void pickImageFromGalery() {
 
         Intent intent=new Intent(Intent.ACTION_PICK);
@@ -331,12 +306,128 @@ public class reservermaintenant extends AppCompatActivity {
             }
         }
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE){
             imageView.setImageURI(data.getData());
+            imageuri=data.getData();
         }
     }
+
+    private void uploadimage() {
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Téléchargement");
+        progressDialog.show();
+       final StorageReference filepath = storageReference.child(imageuri.getLastPathSegment()+".jpg");
+       final  UploadTask uploadTask =filepath.putFile(imageuri);
+       uploadTask.addOnFailureListener(new OnFailureListener() {
+           @Override
+           public void onFailure(@NonNull Exception e) {
+               progressDialog.dismiss();
+               String message  =e.toString();
+               Toast.makeText(reservermaintenant.this,"Erreur: "+message,Toast.LENGTH_SHORT).show();
+           }
+       }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+           @Override
+           public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                 Task<Uri> uriTask =uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                     @Override
+                     public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                         if( ! (task.isSuccessful())){
+                             throw task.getException();
+                         }
+                         return  filepath.getDownloadUrl();
+
+                     }
+                 }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                     @Override
+                     public void onComplete(@NonNull Task<Uri> task) {
+                         if (task.isSuccessful()){
+                             urlimage = task.getResult().toString();
+                             System.out.println("ur :"+urlimage);
+                             System.out.println("ur :"+urlimage);
+                             System.out.println("ur :"+urlimage);
+                             System.out.println("ur :"+urlimage);
+
+                             progressDialog.dismiss();
+                             Toast.makeText(reservermaintenant.this,"Votre reseravationt a été terminée avec succés",Toast.LENGTH_SHORT).show();
+                             ajouter();
+
+                         }
+                     }
+                 });
+           }
+       }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+           @Override
+           public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+               double pourcentage =(100.00 * taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+               progressDialog.setMessage("Progresse: "+(int) pourcentage+" %");
+
+           }
+       });
+
+
+    }
+
+    private void ajouter() {
+        final DatabaseReference rootref;
+        rootref= FirebaseDatabase.getInstance().getReference();
+        rootref.keepSynced(true);
+        rootref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                final HashMap<String, Object> userDataMap = new HashMap<>();
+
+
+
+
+
+                userDataMap.put("typechambre",typechambre);
+                userDataMap.put("datedebut", datedebut);
+                userDataMap.put("URL",urlimage);
+                final String  key=getIntent().getStringExtra("nomhotel");
+                final String  emailhotel=getIntent().getStringExtra("emailHotel");
+
+                userDataMap.put("nomHotel", key);
+                userDataMap.put("datefin", datefin);
+                userDataMap.put("etat", "Confirmé");
+                userDataMap.put("prix", String.valueOf(prixtotal)+" DA");
+                userDataMap.put("emailhotel", emailhotel);
+                userDataMap.put("dure",String.valueOf(dure)+" jours");
+                userDataMap.put("email",firebaseAuth.getCurrentUser().getEmail());
+                rootref.child("reservation").child(firebaseAuth.getCurrentUser().getUid()+key+ new Random().nextInt(10000)).updateChildren(userDataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Intent intent =new Intent(reservermaintenant.this,home.class);
+                        startActivity(intent);
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void calculerdifference(String dateone, String datetwo) {
+               DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/uuuu");
+               String firstDate = dateone;
+               String secondeDate =datetwo;
+               LocalDate date1 =LocalDate.parse(firstDate,formatter);
+               LocalDate date2 =LocalDate.parse(secondeDate,formatter);
+               long daybetwen = ChronoUnit.DAYS.between(date1,date2);
+               dure= daybetwen;
+               somme.setText(String.valueOf(dure)+" Jour(s)");
+
+
+    }
+
+
+
+
 }

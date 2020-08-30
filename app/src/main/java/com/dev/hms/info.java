@@ -6,17 +6,20 @@ public class info {
     private String wilaya;
     private String Rating;
     private String nom;
+    private String image;
 
     public  info(){
 
     }
 
-    public info(String localisation, String prix_par_nuit, String wilaya, String rating, String nom) {
+
+    public info(String localisation, String prix_par_nuit, String wilaya, String rating, String nom, String image) {
         this.localisation = localisation;
         this.prix_par_nuit = prix_par_nuit;
         this.wilaya = wilaya;
         Rating = rating;
         this.nom = nom;
+        this.image = image;
     }
 
     public String getLocalisation() {
@@ -43,7 +46,7 @@ public class info {
         this.wilaya = wilaya;
     }
 
-    public CharSequence getRating() {
+    public String getRating() {
         return Rating;
     }
 
@@ -57,5 +60,13 @@ public class info {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

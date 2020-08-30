@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,6 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 
@@ -28,7 +30,9 @@ public class reservation extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference userRef;
     private FirebaseAuth firebaseAuth;
-    private String loc,num,nom,rating,prix,wilaya;
+    private ImageView cheque;
+    private TextView information;
+    private String loc,num,nom,rating,prix,wilaya,emailhotel,info,url;
     private ImageView favorise,defavorise;
 
     @Override
@@ -39,6 +43,9 @@ public class reservation extends AppCompatActivity {
 
 
         reserver=findViewById(R.id.reserver);
+        cheque=findViewById(R.id.image);
+        information=findViewById(R.id.information);
+
         apperler=findViewById(R.id.appeler);
         localisation=findViewById(R.id.localisation);
         favorise=findViewById(R.id.favorise);
@@ -50,6 +57,8 @@ public class reservation extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent =new Intent(getApplicationContext(),reservermaintenant.class);
+                intent.putExtra("emailHotel",emailhotel);
+
                 intent.putExtra("nomhotel",nom);
                 startActivity(intent);
             }
@@ -71,10 +80,19 @@ public class reservation extends AppCompatActivity {
                              num =dataSnapshot1.child("numero_telephone").getValue().toString();
                              loc =dataSnapshot1.child("localisation").getValue().toString();
                              nom=dataSnapshot1.child("nom").getValue().toString();
+                             emailhotel=dataSnapshot1.child("email").getValue().toString();
+                             info=dataSnapshot1.child("description").getValue().toString();
+                             url=dataSnapshot1.child("image").getValue().toString();
 
-                             rating=dataSnapshot1.child("Rating").getValue(String.class).toString();
+
+
+
+                            rating=dataSnapshot1.child("Rating").getValue(String.class).toString();
                              prix=dataSnapshot1.child("prix_par_nuit").getValue(String.class).toString();
                              wilaya=dataSnapshot1.child("wilaya").getValue(String.class).toString();
+                            information.setText(info);
+                            Picasso.get().load(url).into(cheque);
+
 
                         }
                     }
@@ -87,6 +105,7 @@ public class reservation extends AppCompatActivity {
 
             }
         });
+
 
         final DatabaseReference rootref;
         rootref= FirebaseDatabase.getInstance().getReference("favorise");
@@ -262,10 +281,13 @@ public class reservation extends AppCompatActivity {
                         userDataMap.put("Rating",rating);
                         userDataMap.put("wilaya",wilaya);
                         userDataMap.put("prix_par_nuit",prix);
+                        userDataMap.put("image",url);
 
 
 
-                        String pr= firebaseAuth.getCurrentUser().getUid().substring(1,4);
+
+
+                String pr= firebaseAuth.getCurrentUser().getUid().substring(1,4);
                         userDataMap.put("ID",nom+pr);
 
 

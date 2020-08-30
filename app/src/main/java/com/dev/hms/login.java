@@ -58,7 +58,7 @@ public class login extends AppCompatActivity {
 
                 }
 
-                if ((motpasse.length() > 5) && (motpasse.length() < 12)) {
+                if ((motpasse.length() <5) | (motpasse.length() >12)) {
                     pswd.setError("Ecrivez votre mot passe");
                     pswd.requestFocus();
                     return;

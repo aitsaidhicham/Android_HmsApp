@@ -6,18 +6,18 @@ public class inforeservation {
     private String dure;
     private String prix;
     private String datedebut;
-    private String nom;
+    private String etat;
 
     public  inforeservation(){
 
     }
 
-    public inforeservation(String nomHotel, String dure, String prix, String datedebut, String nom) {
+    public inforeservation(String nomHotel, String dure, String prix, String datedebut, String etat) {
         this.nomHotel = nomHotel;
         this.dure = dure;
         this.prix = prix;
         this.datedebut = datedebut;
-        this.nom = nom;
+        this.etat = etat;
     }
 
     public String getNomHotel() {
@@ -52,11 +52,11 @@ public class inforeservation {
         this.datedebut = datedebut;
     }
 
-    public String getNom() {
-        return nom;
+    public String getEtat() {
+        return etat;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setEtat(String etat) {
+        this.etat = etat;
     }
 }

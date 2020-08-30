@@ -7,19 +7,9 @@
     android:background="@color/background"
     tools:context=".login">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/my_toolbar"
-        android:background="@color/white"
-        android:alpha="0.09"
-        android:elevation="4dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-
-    </androidx.appcompat.widget.Toolbar>
 
     <ImageView
-        android:layout_below="@id/my_toolbar"
         android:background="@drawable/travel"
         android:layout_margin="50dp"
         android:id="@+id/logo"

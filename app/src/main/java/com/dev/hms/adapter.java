@@ -6,11 +6,14 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -36,6 +39,7 @@ public class adapter extends RecyclerView.Adapter<adapter.MyViewHolder> {
         holder.nom.setText(hotels.get(position).getNom());
         holder.wilaya.setText(hotels.get(position).getWilaya());
         holder.Prix.setText(hotels.get(position).getPrix_par_nuit()+" DA");
+        Picasso.get().load(hotels.get(position).getImage()).into(holder.imageView);
 
         float etoile= Float.parseFloat(hotels.get(position).getRating().toString());
         holder.ratingBar.setRating(etoile);
@@ -61,7 +65,11 @@ public class adapter extends RecyclerView.Adapter<adapter.MyViewHolder> {
         });
 
 
+
+
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -72,10 +80,12 @@ public class adapter extends RecyclerView.Adapter<adapter.MyViewHolder> {
 
         TextView nom,wilaya,Prix,localisation;
         RatingBar ratingBar;
+        ImageView imageView;
 
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            imageView=(ImageView) itemView.findViewById(R.id.place_image) ;
             nom=(TextView) itemView.findViewById(R.id.place_name);
             wilaya =(TextView) itemView.findViewById(R.id.wilaya);
             Prix=(TextView) itemView.findViewById(R.id.prix);
@@ -84,5 +94,6 @@ public class adapter extends RecyclerView.Adapter<adapter.MyViewHolder> {
 
 
         }
+
     }
 }

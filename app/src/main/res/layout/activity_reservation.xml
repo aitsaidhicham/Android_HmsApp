@@ -19,6 +19,7 @@
         android:textStyle="bold"></TextView>
 
     <ImageView
+        android:scaleType="centerCrop"
         android:id="@+id/image"
         android:layout_marginTop="7dp"
         android:layout_marginRight="20sp"
@@ -37,6 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
         android:textSize="17sp"
         android:textColor="@color/item"
         android:text="Informations"
@@ -51,9 +53,11 @@
             android:src="@drawable/ic_baseline_favorite_24"
             android:layout_alignParentRight="true"
             android:layout_marginRight="30dp"
+            android:layout_marginTop="20dp"
             ></ImageView>
 
         <ImageView
+            android:layout_marginTop="20dp"
             android:id="@+id/defavorise"
             android:visibility="gone"
             android:layout_width="30dp"

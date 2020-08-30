@@ -1,13 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+    <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent">
 
-    <EditText
+
+
+    <TextView
+
+        android:id="@+id/text_createAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="25dp"
+        android:textStyle="bold"
+        android:fontFamily="@font/amiko"
+        android:text="Modifier le Profile"
+        android:textColor="@color/black"
+        android:textSize="25dp">
+
+    </TextView>
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profile_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/profile"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        app:civ_border_color="@color/white"/>
+
+    <EditText
+        android:textColor="@color/black"
+        android:id="@+id/nom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="15dp"
+        android:drawableStart="@drawable/ic_baseline_emoji_people_241"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/roboto_regular"
+        android:background="@drawable/custom_input"
+        android:hint="Nom et Prénom"
+        android:inputType="textPersonName"
+        android:padding="15dp"
+        android:paddingHorizontal="10dp"
+        android:textColorHint="@color/black">
+    </EditText>
 
 
-</RelativeLayout>
+    <EditText
+        android:textColor="@color/black"
+        android:maxLength="10"
+        android:id="@+id/num"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/ic_baseline_local_phone_241"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/roboto_regular"
+        android:hint="Numéro de téléphone "
+        android:inputType="phone"
+        android:padding="15dp"
+        android:paddingHorizontal="10dp"
+        android:textColorHint="@color/black"></EditText>
+    <TextView
+        android:textColor="@color/black"
+        android:id="@+id/wilaya"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/ic_baseline_room_241"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/roboto_regular"
+        android:hint="Wilaya"
+        android:textSize="20sp"
+        android:padding="15dp"
+        android:paddingHorizontal="10dp"
+        android:textColorHint="@color/black"></TextView>
+
+    <TextView
+        android:textColor="@color/black"
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/ic_baseline_email_241"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/roboto_regular"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:padding="15dp"
+        android:paddingHorizontal="10dp"
+        android:textColorHint="@color/black"></TextView>
+
+    <Button
+        android:id="@+id/signup"
+        android:layout_width="220dp"
+        android:layout_marginTop="40dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/custom_button"
+        android:fontFamily="@font/roboto_medium"
+        android:text="mise a jour"
+        android:textColor="@color/white"></Button>
+
+
+
+
+</LinearLayout>
