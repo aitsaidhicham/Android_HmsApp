@@ -58,7 +58,7 @@ public class login extends AppCompatActivity {
 
                 }
 
-                if ((motpasse.length() < 5) && (motpasse.length() > 12)) {
+                if ((motpasse.length() > 5) && (motpasse.length() < 12)) {
                     pswd.setError("Ecrivez votre mot passe");
                     pswd.requestFocus();
                     return;
@@ -70,11 +70,11 @@ public class login extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(login.this, "votre Connexion est réussie", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(login.this, "Connexion est réussie", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(login.this, home.class);
                                 startActivity(intent);
                             } else {
-                                Toast.makeText(login.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(login.this, "Erreur ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

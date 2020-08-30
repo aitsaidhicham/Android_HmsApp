@@ -1,5 +1,7 @@
 package com.dev.hms;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,13 +51,6 @@ public class fragmentacceuil extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 firebaseAuth=FirebaseAuth.getInstance();
-
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    if (((firebaseAuth.getCurrentUser().getUid())!=null)){
-                        if (dataSnapshot1.child("email").getValue().equals(firebaseAuth.getCurrentUser().getEmail())) {
-                            name.setText("Salut, "+(dataSnapshot1.child("nometprenom").getValue(String.class)));
-                        }}
-                }
             }
 
 
@@ -84,12 +79,8 @@ public class fragmentacceuil extends Fragment {
 
                 for (DataSnapshot dataSnapshot1 : snapshot.getChildren()) {
 
-
                         info p = dataSnapshot1.getValue(info.class);
                         list.add(p);
-
-
-
 
                     }
 
